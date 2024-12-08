@@ -33,6 +33,7 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(angularVelocity * Time.deltaTime * transform.forward);
+            
         }
     }
 }

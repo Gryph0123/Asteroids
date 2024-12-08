@@ -4,7 +4,7 @@ public class Wraparound : MonoBehaviour
 {
 
     // Gets the dimentions of the screen
-    public float borderHeight = Camera.main.orthographicSize;
+    public float borderHeight;
     public float left;
     public float right;
 
