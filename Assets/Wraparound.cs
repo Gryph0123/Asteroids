@@ -15,7 +15,6 @@ public class Wraparound : MonoBehaviour
         float aspect = Camera.main.aspect;
         left = -borderHeight * aspect;
         right = borderHeight * aspect;
-        right = borderHeight * aspect;
     }
 
     // Update is called once per frame

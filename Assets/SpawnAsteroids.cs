@@ -1,3 +1,4 @@
+using Unity.Hierarchy;
 using UnityEngine;
 
 public class SpawnAsteroids : MonoBehaviour
@@ -34,7 +35,6 @@ public class SpawnAsteroids : MonoBehaviour
         float aspect = Camera.main.aspect;
         left = -borderHeight * aspect;
         right = borderHeight * aspect;
-        right = borderHeight * aspect;
 
     }
 
@@ -52,33 +52,95 @@ public class SpawnAsteroids : MonoBehaviour
 
             // Picks what side of the sceen we should spawn the asteroid from
             // 0 = top
-            // 1 = right
+            // 1 = left
             // 2 = bottom
-            // 3 = left
+            // 3 = right
             int screenSidePicker = Random.Range(0, 4);
 
             if (screenSidePicker == 0) 
-            { 
-
-            }
-
-            if (screenSidePicker == 1) 
-            { 
-
-            }
-
-            if (screenSidePicker == 2)
             {
 
+                // Create new asteroid and apply a position to it
+                GameObject newAsteroid = Object.Instantiate(asteroidPrefab, 
+                   new Vector3(Random.Range(left, right), borderHeight, 0f),
+                   Quaternion.identity);
+
+                Rigidbody2D newAsteroidRigidBody = newAsteroid.GetComponent<Rigidbody2D>(); // Calls the rigidbody of the asteroid
+
+                // Resizes the asteroid to some ramomized value.
+                newAsteroid.transform.localScale = Random.Range(minAsteroidSize, maxAsteroidSize) * Vector3.one;
+
+                // Sets the velocity to some random vector
+                float asteroidSpeed = Random.Range(minAsteroidSpeed, maxAsteroidSpeed);
+                float asteroidAngle = Random.Range(Mathf.PI, 2*Mathf.PI);
+                newAsteroidRigidBody.velocity = new Vector2(asteroidSpeed * Mathf.Cos(asteroidAngle), asteroidSpeed * Mathf.Sin(asteroidAngle));
+
+                newAsteroidRigidBody.angularVelocity = Random.Range(-maxAngularVelocity, maxAngularVelocity); // Sets the angular velocity of the asteroid
+
             }
 
-            if (screenSidePicker == 3)
+            else if (screenSidePicker == 1) 
             {
+                // Create new asteroid and apply a position to it
+                GameObject newAsteroid = Object.Instantiate(asteroidPrefab,
+                   new Vector3(left, Random.Range(-borderHeight, borderHeight), 0f),
+                   Quaternion.identity);
 
+                Rigidbody2D newAsteroidRigidBody = newAsteroid.GetComponent<Rigidbody2D>(); // Calls the rigidbody of the asteroid
+
+                // Resizes the asteroid to some ramomized value.
+                newAsteroid.transform.localScale = Random.Range(minAsteroidSize, maxAsteroidSize) * Vector3.one;
+
+                // Sets the velocity to some random vector
+                float asteroidSpeed = Random.Range(minAsteroidSpeed, maxAsteroidSpeed);
+                float asteroidAngle = Random.Range(-Mathf.PI / 2, Mathf.PI / 2);
+                newAsteroidRigidBody.velocity = new Vector2(asteroidSpeed * Mathf.Cos(asteroidAngle), asteroidSpeed * Mathf.Sin(asteroidAngle));
+
+                newAsteroidRigidBody.angularVelocity = Random.Range(-maxAngularVelocity, maxAngularVelocity); // Sets the angular velocity of the asteroid
+            }
+
+            else if (screenSidePicker == 2)
+            {
+                // Create new asteroid and apply a position to it
+                GameObject newAsteroid = Object.Instantiate(asteroidPrefab,
+                   new Vector3(Random.Range(left, right), -borderHeight, 0f),
+                   Quaternion.identity);
+
+                Rigidbody2D newAsteroidRigidBody = newAsteroid.GetComponent<Rigidbody2D>(); // Calls the rigidbody of the asteroid
+
+                // Resizes the asteroid to some ramomized value.
+                newAsteroid.transform.localScale = Random.Range(minAsteroidSize, maxAsteroidSize) * Vector3.one;
+
+                // Sets the velocity to some random vector
+                float asteroidSpeed = Random.Range(minAsteroidSpeed, maxAsteroidSpeed);
+                float asteroidAngle = Random.Range(0, Mathf.PI);
+                newAsteroidRigidBody.velocity = new Vector2(asteroidSpeed * Mathf.Cos(asteroidAngle), asteroidSpeed * Mathf.Sin(asteroidAngle));
+
+                newAsteroidRigidBody.angularVelocity = Random.Range(-maxAngularVelocity, maxAngularVelocity); // Sets the angular velocity of the asteroid
+            }
+
+            else
+            {
+                // Create new asteroid and apply a position to it
+                GameObject newAsteroid = Object.Instantiate(asteroidPrefab,
+                   new Vector3(right, Random.Range(-borderHeight, borderHeight), 0f),
+                   Quaternion.identity);
+
+                Rigidbody2D newAsteroidRigidBody = newAsteroid.GetComponent<Rigidbody2D>(); // Calls the rigidbody of the asteroid
+               
+                // Resizes the asteroid to some ramomized value.
+                newAsteroid.transform.localScale = Random.Range(minAsteroidSize, maxAsteroidSize) * Vector3.one;
+
+                // Sets the velocity to some random vector
+                float asteroidSpeed = Random.Range(minAsteroidSpeed, maxAsteroidSpeed);
+                float asteroidAngle = Random.Range(Mathf.PI / 2, 3 * Mathf.PI / 2);
+                newAsteroidRigidBody.velocity = new Vector2(asteroidSpeed * Mathf.Cos(asteroidAngle), asteroidSpeed * Mathf.Sin(asteroidAngle));
+
+                newAsteroidRigidBody.angularVelocity = Random.Range(-maxAngularVelocity, maxAngularVelocity); // Sets the angular velocity of the asteroid
             }
 
 
-            GameObject newAsteroid = Object.Instantiate(asteroidPrefab);
+            
         }
     }
 }
