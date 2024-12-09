@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameEnder : MonoBehaviour
 {
 
+    public AudioSource gameEndSound;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
